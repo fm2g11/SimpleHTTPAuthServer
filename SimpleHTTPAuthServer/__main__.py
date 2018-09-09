@@ -43,7 +43,7 @@ class SimpleHTTPAuthHandler(SimpleHTTPRequestHandler):
         if auth is None:
             self.do_authhead()
             self.wfile.write(b'no auth header received')
-        elif auth[0] == 'Basic ' + self.KEY:
+        elif auth[0] == 'Basic ' + self.KEY.decode('utf8'):
             SimpleHTTPRequestHandler.do_GET(self)
         else:
             self.do_authhead()
