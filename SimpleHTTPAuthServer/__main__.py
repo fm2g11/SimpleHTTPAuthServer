@@ -43,12 +43,12 @@ class SimpleHTTPAuthHandler(SimpleHTTPRequestHandler):
         if auth is None:
             self.do_authhead()
             self.wfile.write(b'no auth header received')
-        elif auth[0] == 'Basic ' + self.KEY.decode('utf8'):
+        elif auth[0] == 'Basic ' + self.KEY:
             SimpleHTTPRequestHandler.do_GET(self)
         else:
             self.do_authhead()
             self.wfile.write(auth[0].encode('utf8'))
-            self.wfile.write('not authenticated')
+            self.wfile.write(b'not authenticated')
 
 
 def serve_https(https_port=80, https=True, start_dir=None, handler_class=SimpleHTTPAuthHandler):
